@@ -1,9 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 
 @Controller('admin/login')
 export class LoginController {
   @Get()
+  @Render('admin/login')
   index() {
-    return '我是登录页面';
+    return {};
   }
 }
