@@ -33,7 +33,40 @@ export class LoginController {
   }
   //接收数据
   @Post('doLogin')
-  doLogin(@Body() body) {
+  async doLogin(@Body() body, @Request() req, @Response() res) {
+    try {
+      const code: string = body.code;
+      const username: string = body.username;
+      let password: string = body.password;
+      if (username == '' || password.length < 6) {
+        console.log('用户名或密码不合法');
+      } else {
+        //转化成大写 无论用户输入的是大写还是小写都能匹配到
+        if (code.toUpperCase() == req.session.code.toUpperCase()) {
+          password = this.toolservice.getMd5(body.password);
+          console.log(password);
+          const userResult = await this.adminService.find({
+            username: username,
+            password: password,
+          });
+          console.log(userResult);
+          if (userResult.length > 0) {
+            console.log('登录成功');
+            req.session.userinfo = userResult[0]; //把查询到的数据返回给session
+            res.redirect('/admin/main');
+          } else {
+            res.redirect('/admin/login');
+            console.log('用户名或者密码不正确');
+          }
+        } else {
+          console.log('验证码不正确');
+          res.redirect('/admin/login');
+        }
+      }
+    } catch (error) {
+      res.redirect('/admin/login');
+    }
+
     console.log(body);
     return '成功';
   }
