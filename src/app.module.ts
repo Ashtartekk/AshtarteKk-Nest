@@ -3,12 +3,20 @@ import { AdminModule } from './module/admin/admin.module';
 import { DefaultModule } from './module/default/default.module';
 import { ApiModule } from './module/api/api.module';
 import { ToolsService } from './service/tools/tools.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 //配置中间件
 import { AdminauthMiddleware } from './middleware/adminauth/adminauth.middleware';
 
 @Module({
-  imports: [AdminModule, DefaultModule, ApiModule],
+  imports: [
+    AdminModule,
+    DefaultModule,
+    ApiModule,
+    MongooseModule.forRoot('mongodb://localhost/nestxiaomi', {
+      useNewUrlParser: true,
+    }),
+  ],
   controllers: [],
   providers: [ToolsService],
 })
