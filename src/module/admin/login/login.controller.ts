@@ -1,12 +1,17 @@
 import { Controller, Get, Render, Request, Response } from '@nestjs/common';
 import { ToolsService } from '../../../service/tools/tools.service';
+import { AdminService } from '../../../service/admin/admin.service';
 
 @Controller('admin/login')
 export class LoginController {
-  constructor(private toolservice: ToolsService) {}
+  constructor(
+    private toolservice: ToolsService,
+    private adminService: AdminService,
+  ) {}
   @Get()
   @Render('admin/login')
-  index() {
+  async index() {
+    console.log(await this.adminService.find());
     return {};
   }
 

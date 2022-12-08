@@ -5,6 +5,7 @@ import { ManagerController } from './manager/manager.controller';
 import { ToolsService } from '../../service/tools/tools.service';
 import { AdminSchema } from '../../schema/admin.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AdminService } from '../../service/admin/admin.service';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { MongooseModule } from '@nestjs/mongoose';
     ]),
   ],
   controllers: [MainController, LoginController, ManagerController],
-  providers: [ToolsService],
+  providers: [ToolsService, AdminService],
 })
 export class AdminModule {}
