@@ -1,4 +1,12 @@
-import { Controller, Get, Render, Request, Response } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Render,
+  Request,
+  Body,
+  Response,
+} from '@nestjs/common';
 import { ToolsService } from '../../../service/tools/tools.service';
 import { AdminService } from '../../../service/admin/admin.service';
 
@@ -23,4 +31,17 @@ export class LoginController {
     res.type('svg');
     res.send(svgCaptcha.data);
   }
+  //接收数据
+  @Post('doLogin')
+  doLogin(@Body() body) {
+    console.log(body);
+    return '成功';
+  }
+  /**
+   * 1.需要在前端农业面用js验证用户输入的信息是否正确
+   * 2.验证码正确的话对表单里的密码进行md5加密 cnpm install md5 --save
+   * 3.在用户表的集合里查询当前用户是否存在
+   * 4.如果存在就登录成功 保存用户信息然后跳转到后台管理系统
+   * 5.如果数据库没有该用户就登录失败 就返回登录页面
+   */
 }
