@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { IndexController } from './index/index.controller';
 
-@Module({})
+@Module({
+  controllers: [IndexController]
+})
 export class DefaultModule {}
