@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import * as mongoose from 'mongoose';
-
 const Schema = mongoose.Schema;
 const d = new Date();
 
