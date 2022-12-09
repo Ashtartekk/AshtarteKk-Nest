@@ -75,7 +75,9 @@ export class LoginController {
    * 4.如果存在就登录成功 保存用户信息然后跳转到后台管理系统
    * 5.如果数据库没有该用户就登录失败 就返回登录页面
    */
-
-  @get('loginOut')
-  loginOut() {}
+  @Get('loginOut') //退出登录路由
+  loginOut(@Request() req, @Response() res) {
+    req.session.userinfo = null;
+    res.redirect('/admin/login');
+  }
 }
