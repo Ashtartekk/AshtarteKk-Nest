@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ToolsService } from '../../../service/tools/tools.service';
 import { AdminService } from '../../../service/admin/admin.service';
+import { get } from 'http';
 
 @Controller('admin/login')
 export class LoginController {
@@ -40,10 +41,7 @@ export class LoginController {
       let password: string = body.password; //获取用户输入的密码
       if (username == '' || password.length < 6) {
         //当用户名为空或密码长度大于6 输出用户名或密码不合法
-        await res.render('admin/public/error', {
-          message: '用户名或密码不合法',
-          redirectUrl: '/admin/login',
-        });
+        this.toolservice.error(res, '用户名或密码不合法', '/admin/login');
       } else {
         //转化成大写 无论用户输入的是大写还是小写都能匹配到 //当验证码和session里的验证码相同时
         if (code.toUpperCase() == req.session.code.toUpperCase()) {
@@ -57,21 +55,12 @@ export class LoginController {
             //当有返回值得时候登录成功
             console.log('登录成功');
             req.session.userinfo = userResult[0]; //把查询到的数据返回给session
-            // res.redirect('/admin/main'); //跳转到主页
-            await res.render('admin/public/success', {
-              redirectUrl: '/admin/main',
-            });
+            this.toolservice.success(res, '/admin/main'); //跳转到主页
           } else {
-            await res.render('admin/public/error', {
-              message: '用户名或密码不正确',
-              redirectUrl: '/admin/login', //不成功就重定向到登录页
-            });
+            this.toolservice.error(res, '用户名或密码不正确', '/admin/login');
           }
         } else {
-          await res.render('admin/public/error', {
-            message: '验证码不正确',
-            redirectUrl: '/admin/login',
-          });
+          this.toolservice.error(res, '验证码不正确', '/admin/login');
         }
       }
     } catch (error) {
@@ -86,4 +75,7 @@ export class LoginController {
    * 4.如果存在就登录成功 保存用户信息然后跳转到后台管理系统
    * 5.如果数据库没有该用户就登录失败 就返回登录页面
    */
+
+  @get('loginOut')
+  loginOut() {}
 }

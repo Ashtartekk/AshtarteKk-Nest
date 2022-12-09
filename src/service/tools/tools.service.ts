@@ -22,4 +22,17 @@ export class ToolsService {
     //Md5加密
     return md5(str);
   }
+  async success(res, redirectUrl) {
+    await res.render('admin/public/success', {
+      //跳转成功方法
+      redirectUrl: redirectUrl,
+    });
+  }
+  async error(res, message, redirectUrl) {
+    //跳转失败方法
+    await res.render('admin/public/error', {
+      message: message,
+      redirectUrl: redirectUrl,
+    });
+  }
 }
