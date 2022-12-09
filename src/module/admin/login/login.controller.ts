@@ -35,40 +35,49 @@ export class LoginController {
   @Post('doLogin')
   async doLogin(@Body() body, @Request() req, @Response() res) {
     try {
-      const code: string = body.code;
-      const username: string = body.username;
-      let password: string = body.password;
+      const code: string = body.code; //获取用户输入的验证码
+      const username: string = body.username; //获取用户输入的用户名
+      let password: string = body.password; //获取用户输入的密码
       if (username == '' || password.length < 6) {
-        console.log('用户名或密码不合法');
+        //当用户名为空或密码长度大于6 输出用户名或密码不合法
+        await res.render('admin/public/error', {
+          message: '用户名或密码不合法',
+          redirectUrl: '/admin/login',
+        });
       } else {
-        //转化成大写 无论用户输入的是大写还是小写都能匹配到
+        //转化成大写 无论用户输入的是大写还是小写都能匹配到 //当验证码和session里的验证码相同时
         if (code.toUpperCase() == req.session.code.toUpperCase()) {
-          password = this.toolservice.getMd5(body.password);
-          console.log(password);
+          password = this.toolservice.getMd5(body.password); //使用md5进行加密
           const userResult = await this.adminService.find({
+            //查询用户表中匹配的用户名和密码
             username: username,
             password: password,
           });
-          console.log(userResult);
           if (userResult.length > 0) {
+            //当有返回值得时候登录成功
             console.log('登录成功');
             req.session.userinfo = userResult[0]; //把查询到的数据返回给session
-            res.redirect('/admin/main');
+            // res.redirect('/admin/main'); //跳转到主页
+            await res.render('admin/public/success', {
+              redirectUrl: '/admin/main',
+            });
           } else {
-            res.redirect('/admin/login');
-            console.log('用户名或者密码不正确');
+            await res.render('admin/public/error', {
+              message: '用户名或密码不正确',
+              redirectUrl: '/admin/login', //不成功就重定向到登录页
+            });
           }
         } else {
-          console.log('验证码不正确');
-          res.redirect('/admin/login');
+          await res.render('admin/public/error', {
+            message: '验证码不正确',
+            redirectUrl: '/admin/login',
+          });
         }
       }
     } catch (error) {
-      res.redirect('/admin/login');
+      res.redirect('/admin/login'); //不成功就重定向到登录页
     }
-
-    console.log(body);
-    return '成功';
+    return '成功'; //这个是doLogin路由的登录成功
   }
   /**
    * 1.需要在前端农业面用js验证用户输入的信息是否正确

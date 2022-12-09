@@ -1,5 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-
+/**
+ * 中间件:路由拦截
+ */
 @Injectable()
 export class AdminauthMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
@@ -8,7 +10,7 @@ export class AdminauthMiddleware implements NestMiddleware {
     const userinfo = req.session.userinfo; //session里的用户信息
     const pathname = req.baseUrl; //获取访问的地址
     if (userinfo) {
-      //存在userinfo表示登录了
+      //在session里有userinfo表示登录了
       next();
     } else {
       if (

@@ -2,8 +2,8 @@ import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AdminModule } from './module/admin/admin.module';
 import { DefaultModule } from './module/default/default.module';
 import { ApiModule } from './module/api/api.module';
-import { ToolsService } from './service/tools/tools.service';
-import { MongooseModule } from '@nestjs/mongoose';
+import { ToolsService } from './service/tools/tools.service'; //定义工具类服务
+import { MongooseModule } from '@nestjs/mongoose'; //定义数据库
 
 //配置中间件
 import { AdminauthMiddleware } from './middleware/adminauth/adminauth.middleware';

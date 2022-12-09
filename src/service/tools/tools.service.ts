@@ -8,6 +8,7 @@ import * as md5 from 'md5';
 @Injectable()
 export class ToolsService {
   getcaptcha() {
+    //获取验证码
     const captcha = svgCaptcha.create({
       size: 4,
       fontSize: 50,
@@ -18,6 +19,7 @@ export class ToolsService {
     return captcha;
   }
   getMd5(str: string) {
+    //Md5加密
     return md5(str);
   }
 }
