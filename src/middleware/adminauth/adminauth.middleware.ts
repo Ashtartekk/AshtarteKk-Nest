@@ -1,4 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Config } from 'src/config/config';
 /**
  * 中间件:路由拦截
  */
@@ -17,14 +18,14 @@ export class AdminauthMiddleware implements NestMiddleware {
     } else {
       if (
         //排除不需要进行权限判断的页面
-        pathname === '/admin/login' ||
-        pathname === '/admin/login/code' ||
-        pathname === '/admin/login/doLogin'
+        pathname === `/${Config.adminPath}/login` ||
+        pathname === `/${Config.adminPath}/login/code` ||
+        pathname === `/${Config.adminPath}/login/doLogin`
       ) {
         next();
       } else {
         //重定向到登录页面
-        res.redirect('/admin/login');
+        res.redirect(`/${Config.adminPath}/login`);
       }
     }
   }

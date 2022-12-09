@@ -41,7 +41,11 @@ export class LoginController {
       let password: string = body.password; //获取用户输入的密码
       if (username == '' || password.length < 6) {
         //当用户名为空或密码长度大于6 输出用户名或密码不合法
-        this.toolservice.error(res, '用户名或密码不合法', '/admin/login');
+        this.toolservice.error(
+          res,
+          '用户名或密码不合法',
+          `/${Config.adminPath}/login`,
+        );
       } else {
         //转化成大写 无论用户输入的是大写还是小写都能匹配到 //当验证码和session里的验证码相同时
         if (code.toUpperCase() == req.session.code.toUpperCase()) {
@@ -55,16 +59,24 @@ export class LoginController {
             //当有返回值得时候登录成功
             console.log('登录成功');
             req.session.userinfo = userResult[0]; //把查询到的数据返回给session
-            this.toolservice.success(res, '/admin/main'); //跳转到主页
+            this.toolservice.success(res, `/${Config.adminPath}/main`); //跳转到主页
           } else {
-            this.toolservice.error(res, '用户名或密码不正确', '/admin/login');
+            this.toolservice.error(
+              res,
+              '用户名或密码不正确',
+              `/${Config.adminPath}/login`,
+            );
           }
         } else {
-          this.toolservice.error(res, '验证码不正确', '/admin/login');
+          this.toolservice.error(
+            res,
+            '验证码不正确',
+            `/${Config.adminPath}/login`,
+          );
         }
       }
     } catch (error) {
-      res.redirect('/admin/login'); //不成功就重定向到登录页
+      res.redirect(`/${Config.adminPath}/login`); //不成功就重定向到登录页
     }
     return '成功'; //这个是doLogin路由的登录成功
   }
@@ -78,6 +90,6 @@ export class LoginController {
   @Get('loginOut') //退出登录路由
   loginOut(@Request() req, @Response() res) {
     req.session.userinfo = null;
-    res.redirect('/admin/login');
+    res.redirect(`/${Config.adminPath}/login`);
   }
 }
