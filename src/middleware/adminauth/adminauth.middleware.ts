@@ -11,6 +11,8 @@ export class AdminauthMiddleware implements NestMiddleware {
     const pathname = req.baseUrl; //获取访问的地址
     if (userinfo) {
       //在session里有userinfo表示登录了
+      //设置全局变量
+      res.locals.userinfo = userinfo;
       next();
     } else {
       if (
