@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose'; //定义数据库
 
 //配置中间件
 import { AdminauthMiddleware } from './middleware/adminauth/adminauth.middleware';
+import { InitMiddleware } from './middleware/init/init.middleware';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import { AdminauthMiddleware } from './middleware/adminauth/adminauth.middleware
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AdminauthMiddleware).forRoutes('admin/*'); //当访问admin下的路由时 访问这个中间件
+    consumer
+      .apply(AdminauthMiddleware) //当访问admin下的路由时 访问这个中间件
+      .forRoutes('admin/*') //只有admin/的路由才会应用这个中间件
+      .apply(InitMiddleware) //全局变量的中间件
+      .forRoutes('*'); //所有的路由都要应用这个中间件;
   }
 }

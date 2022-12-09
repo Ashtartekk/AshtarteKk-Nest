@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { ToolsService } from '../../../service/tools/tools.service';
 import { AdminService } from '../../../service/admin/admin.service';
-import { get } from 'http';
+import { Config } from '../../../config/config';
 
-@Controller('admin/login')
+@Controller(`${Config.adminPath}/login`)
 export class LoginController {
   constructor(
     private toolservice: ToolsService,
