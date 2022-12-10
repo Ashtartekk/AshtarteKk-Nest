@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose'; //定义数据库
 import { AdminauthMiddleware } from './middleware/adminauth/adminauth.middleware';
 import { InitMiddleware } from './middleware/init/init.middleware';
 import { Config } from './config/config';
+import { AccessService } from './service/access/access.service';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { Config } from './config/config';
     }),
   ],
   controllers: [],
-  providers: [ToolsService],
+  providers: [ToolsService, AccessService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
