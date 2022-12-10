@@ -1,0 +1,47 @@
+<%- include ('../public/page_header.ejs')%>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--
+                列表展示
+            -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>角色名称</th>
+                            <th>角色描述</th>
+                            <th>增加时间</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<roleList.length;i++){%>
+                            <tr>
+                                <td>
+                                    <%=roleList[i].title%>
+                                </td>
+                                <td>
+                                    <%=roleList[i].description%>
+                                </td>
+                                <td>
+                                    <%=roleList[i].add_time%>
+                                </td>
+                                <td class="text-center"><a
+                                        href="/<%=config.adminPath%>/role/edit?id=<%=roleList[i]._id%>">修改</a> 　<a
+                                        class="delete"
+                                        href="/<%=config.adminPath%>/role/delete?id=<%=roleList[i]._id%>">删除</a></td>
+                            </tr>
+
+                            <%}%>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

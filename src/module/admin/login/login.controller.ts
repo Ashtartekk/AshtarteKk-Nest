@@ -20,7 +20,6 @@ export class LoginController {
   @Get()
   @Render('admin/login')
   async index() {
-    console.log(await this.adminService.find());
     return {};
   }
 
@@ -57,7 +56,6 @@ export class LoginController {
           });
           if (userResult.length > 0) {
             //当有返回值得时候登录成功
-            console.log('登录成功');
             req.session.userinfo = userResult[0]; //把查询到的数据返回给session
             this.toolservice.success(res, `/${Config.adminPath}/main`); //跳转到主页
           } else {

@@ -2,7 +2,7 @@
 import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 const d = new Date();
-
+//用户模型
 export const AdminSchema = new mongoose.Schema({
   username: { type: String },
   password: { type: String },

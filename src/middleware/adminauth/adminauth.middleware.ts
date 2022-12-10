@@ -6,7 +6,6 @@ import { Config } from 'src/config/config';
 @Injectable()
 export class AdminauthMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
-    console.log('中间件');
     //1.获取session里保存的用户信息
     const userinfo = req.session.userinfo; //session里的用户信息
     const pathname = req.baseUrl; //获取访问的地址

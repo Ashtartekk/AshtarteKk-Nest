@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-//封装方法 比如一些时间戳
+//封装方法 比如一些时间戳 扩展模板方法
 export class Helper {
   static title = '我是全局的title';
   static substring = function (str: string, start: number, end: number) {

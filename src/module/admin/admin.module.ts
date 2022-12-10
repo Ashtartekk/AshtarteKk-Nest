@@ -6,14 +6,23 @@ import { ToolsService } from '../../service/tools/tools.service';
 import { AdminSchema } from '../../schema/admin.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AdminService } from '../../service/admin/admin.service';
+import { RoleSchema } from '../../schema/role.scheama';
+import { RoleService } from 'src/service/role/role.service';
+import { RoleController } from './role/role.controller';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'Admin', schema: AdminSchema, collection: 'admin' },
+      { name: 'Role', schema: RoleSchema, collection: 'role' },
     ]),
   ],
-  controllers: [MainController, LoginController, ManagerController],
-  providers: [ToolsService, AdminService],
+  controllers: [
+    MainController,
+    LoginController,
+    ManagerController,
+    RoleController,
+  ],
+  providers: [ToolsService, AdminService, RoleService],
 })
 export class AdminModule {}
