@@ -6,7 +6,7 @@ import { RoleInterface } from 'src/interface/role.interface';
 export class RoleService {
   constructor(@InjectModel('Role') private roleModel) {}
   //查询角色
-  async find(json: RoleInterface, fileds?: string) {
+  async find(json: RoleInterface = {}, fileds?: string) {
     try {
       return await this.roleModel.find(json, fileds);
     } catch (error) {

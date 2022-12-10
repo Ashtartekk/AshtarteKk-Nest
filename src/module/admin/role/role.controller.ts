@@ -18,7 +18,7 @@ export class RoleController {
     private roleService: RoleService,
     private toolsService: ToolsService,
   ) {}
-
+  //渲染角色列表
   @Get()
   @Render('admin/role/index')
   async index() {
@@ -28,13 +28,13 @@ export class RoleController {
       roleList: result,
     };
   }
-
+  //渲染增加角色页面
   @Get('add')
   @Render('admin/role/add')
   async add() {
     return {};
   }
-
+  //增加角色
   @Post('doAdd')
   async doAdd(@Body() body, @Response() res) {
     if (body.title != '') {
@@ -49,7 +49,7 @@ export class RoleController {
       this.toolsService.error(res, '标题不能为空', `/${Config.adminPath}/role`);
     }
   }
-
+  //渲染编辑页面
   @Get('edit')
   @Render('admin/role/edit')
   async edit(@Query() query) {
@@ -58,7 +58,7 @@ export class RoleController {
       roleList: result[0],
     };
   }
-
+  //编辑
   @Post('doEdit')
   async doEdit(@Body() body, @Response() res) {
     if (body.title != '') {
@@ -72,10 +72,10 @@ export class RoleController {
       this.toolsService.error(res, '标题不能为空', `/${Config.adminPath}/role`);
     }
   }
-
+  //删除
   @Get('delete')
   async delete(@Query() query, @Response() res) {
-    const result = await this.roleService.delete({ _id: query.id });
+    await this.roleService.delete({ _id: query.id });
     this.toolsService.success(res, `/${Config.adminPath}/role`);
   }
 }
