@@ -10,7 +10,7 @@ export class ToolsService {
   getcaptcha() {
     //获取验证码
     const captcha = svgCaptcha.create({
-      size: 4,
+      size: 1,
       fontSize: 50,
       width: 100,
       height: 40,

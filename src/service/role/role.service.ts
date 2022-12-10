@@ -28,7 +28,7 @@ export class RoleService {
   async update(json1: RoleInterface, json2: RoleInterface) {
     try {
       //第一个参数是指要更新哪条数据 第二个参数是要更新的数据
-      const result = await new this.roleModel.updateOne(json1, json2);
+      const result = await this.roleModel.updateOne(json1, json2);
       return result;
     } catch (error) {
       return [];
@@ -38,7 +38,7 @@ export class RoleService {
   async delete(json: RoleInterface) {
     try {
       //第一个参数是指要更新哪条数据 第二个参数是要更新的数据
-      const result = await new this.roleModel.deleteOne(json);
+      const result = await this.roleModel.deleteOne(json);
       return result;
     } catch (error) {
       return null;
