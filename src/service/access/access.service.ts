@@ -42,7 +42,7 @@ export class AccessService {
     }
   }
   //获取accessmodel
-  getModel() {
-    return this.accessModel;
-  }
+  //   getModel() {
+  //     return this.accessModel;
+  //   }
 }

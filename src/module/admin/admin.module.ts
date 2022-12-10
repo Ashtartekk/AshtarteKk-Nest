@@ -18,7 +18,7 @@ import { AccessController } from './access/access.controller';
     MongooseModule.forFeature([
       { name: 'Admin', schema: AdminSchema, collection: 'admin' },
       { name: 'Role', schema: RoleSchema, collection: 'role' },
-      { name: 'Access', schema: AccessSchema, collection: 'access' },
+      { name: 'Access', schema: AccessSchema, collection: 'acces' },
     ]),
   ],
   controllers: [
