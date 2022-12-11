@@ -77,4 +77,22 @@ export class AccessController {
       moduleList: result,
     };
   }
+  @Post('doEdit')
+  async doEdit(@Body() body, @Response() res) {
+    try {
+      const module_id = body.module_id;
+      const _id = body._id;
+      if (module_id != 0) {
+        body.module_id = new mongoose.Types.ObjectId(module_id);
+      }
+      await this.accessService.update({ _id: _id }, body);
+      this.toolsService.success(res, `/${Config.adminPath}/access`);
+    } catch (error) {
+      this.toolsService.error(
+        res,
+        '非法请求',
+        `/${Config.adminPath}/access/edit?id=${body._id}`,
+      );
+    }
+  }
 }
