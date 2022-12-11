@@ -1,5 +1,4 @@
 <%- include ('../public/page_header.ejs')%>
-
     <div class="container-fluid">
         <div class="row">
 
@@ -29,11 +28,10 @@
                                     <%=helper.formatTime(roleList[i].add_time)%>
                                 </td>
                                 <td class="text-center"><a
-                                        href="/<%=config.adminPath%>/role/edit?id=<%=roleList[i]._id%>">修改</a>
-
-                                    <a class="delete"
-                                        href="/<%=config.adminPath%>/role/delete?id=<%=roleList[i]._id%>">删除</a>
-                                </td>
+                                        href="/<%=config.adminPath%>/role/auth?id=<%=roleList[i]._id%>">授权</a> 　<a
+                                        href="/<%=config.adminPath%>/role/edit?id=<%=roleList[i]._id%>">修改</a> 　<a
+                                        class="delete"
+                                        href="/<%=config.adminPath%>/role/delete?id=<%=roleList[i]._id%>">删除</a></td>
                             </tr>
 
                             <%}%>

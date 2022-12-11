@@ -8,15 +8,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { RoleService } from '../../../service/role/role.service';
-
+import { AccessService } from 'src/service/access/access.service';
 import { ToolsService } from '../../../service/tools/tools.service';
 
 import { Config } from '../../../config/config';
+import { query } from 'express';
 @Controller(`${Config.adminPath}/role`)
 export class RoleController {
   constructor(
     private roleService: RoleService,
     private toolsService: ToolsService,
+    private accessService: AccessService,
   ) {}
   //渲染角色列表
   @Get()
@@ -77,5 +79,28 @@ export class RoleController {
   async delete(@Query() query, @Response() res) {
     await this.roleService.delete({ _id: query.id });
     this.toolsService.success(res, `/${Config.adminPath}/role`);
+  }
+  //授权路由
+  @Get('auth')
+  @Render('admin/role/auth')
+  async auth(@Query() query) {
+    //1、在access表中找出 module_id = 0 的数据
+    //2、让access表和access表关联  条件：找出access表中的module_id 等于 _id 的数据
+    const result = await this.accessService.getModel().aggregate([
+      {
+        $lookup: {
+          from: 'access',
+          localField: '_id',
+          foreignField: 'module_id',
+          as: 'items',
+        },
+      },
+      {
+        $match: {
+          module_id: '0',
+        },
+      },
+    ]);
+    return {};
   }
 }
