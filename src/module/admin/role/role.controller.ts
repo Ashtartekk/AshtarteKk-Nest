@@ -107,5 +107,9 @@ export class RoleController {
     };
   }
 
-  //提交权限
+  //提交权限修改
+  @Post('doAuth')
+  async doAuth(@Body() body) {
+    return body;
+  }
 }
