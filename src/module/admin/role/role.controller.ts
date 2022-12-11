@@ -10,6 +10,7 @@ import {
 import { RoleService } from '../../../service/role/role.service';
 import { AccessService } from 'src/service/access/access.service';
 import { ToolsService } from '../../../service/tools/tools.service';
+import { RoleAccessService } from 'src/service/role-access/role-access.service';
 
 import { Config } from '../../../config/config';
 @Controller(`${Config.adminPath}/role`)
@@ -18,6 +19,7 @@ export class RoleController {
     private roleService: RoleService,
     private toolsService: ToolsService,
     private accessService: AccessService,
+    private roleAccessService: RoleAccessService,
   ) {}
   //渲染角色列表
   @Get()
@@ -109,7 +111,22 @@ export class RoleController {
 
   //提交权限修改
   @Post('doAuth')
-  async doAuth(@Body() body) {
+  async doAuth(@Body() body, @Response() res) {
+    const role_id = body.role_id;
+    const access_node = body.access_node;
+    //1.删除当前角色下面的所有权限
+    await this.roleAccessService.deleteMany({ role_id: role_id });
+    //2.给role_access增加数据 把获取的权限和橘色增加到数据库
+    for (let i = 0; i < access_node.length; i++) {
+      this.roleAccessService.add({
+        role_id: role_id,
+        access_id: access_node[i],
+      });
+    }
+    this.toolsService.success(
+      res,
+      `/${Config.adminPath}/role/auth?id=${role_id}`,
+    );
     return body;
   }
 }

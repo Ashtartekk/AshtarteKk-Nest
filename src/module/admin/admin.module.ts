@@ -11,6 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AdminService } from '../../service/admin/admin.service';
 import { RoleService } from 'src/service/role/role.service';
 import { AccessService } from 'src/service/access/access.service';
+import { RoleAccessService } from 'src/service/role-access/role-access.service';
 import { RoleController } from './role/role.controller';
 import { AccessController } from './access/access.controller';
 
@@ -34,6 +35,12 @@ import { AccessController } from './access/access.controller';
     RoleController,
     AccessController,
   ],
-  providers: [ToolsService, AdminService, RoleService, AccessService],
+  providers: [
+    ToolsService,
+    AdminService,
+    RoleService,
+    AccessService,
+    RoleAccessService,
+  ],
 })
 export class AdminModule {}
