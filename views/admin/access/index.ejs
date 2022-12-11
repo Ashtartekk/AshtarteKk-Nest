@@ -1,5 +1,4 @@
 <%- include ('../public/page_header.ejs')%>
-
     <div class="container-fluid">
         <div class="row">
 
@@ -84,7 +83,9 @@
 
                                     <td class="text-center"><a
                                             href="/<%=config.adminPath%>/access/edit?id=<%=list[i].items[j]._id%>">修改</a>
-                                        <a href="/admin/delete?id=<%=list[i].items[j]._id%>&model=Access">删除</a></td>
+                                        <a class="delete"
+                                            href="/<%=config.adminPath%>/access/delete?id=<%=list[i].items[j]._id%>">删除</a>
+                                    </td>
                                 </tr>
 
                                 <%}%>

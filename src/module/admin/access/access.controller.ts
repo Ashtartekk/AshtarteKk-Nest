@@ -95,4 +95,13 @@ export class AccessController {
       );
     }
   }
+  @Get('delete')
+  async delete(@Query() query, @Response() res) {
+    try {
+      this.accessService.delete({ _id: query.id });
+      this.toolsService.success(res, `/${Config.adminPath}/access`);
+    } catch (error) {
+      this.toolsService.error(res, '非法请求', `/${Config.adminPath}/access`);
+    }
+  }
 }
