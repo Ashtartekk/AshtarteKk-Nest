@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Render, Response } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Render,
+  Response,
+} from '@nestjs/common';
 import { AccessService } from 'src/service/access/access.service';
 import { ToolsService } from 'src/service/tools/tools.service';
 import { Config } from 'src/config/config';
@@ -15,9 +23,7 @@ export class AccessController {
   @Render('admin/access/index')
   async index() {
     //1、在access表中找出  module_id=0的数据
-
     //2、让access表和access表关联    条件：找出access表中module_id等于_id的数据
-
     const result = await this.accessService.getModel().aggregate([
       {
         $lookup: {
@@ -34,7 +40,6 @@ export class AccessController {
       },
     ]);
     // console.log(JSON.stringify(result));
-
     return {
       list: result,
     };
@@ -60,5 +65,16 @@ export class AccessController {
     }
     await this.accessService.add(body);
     this.toolsService.success(res, `/${Config.adminPath}/access`);
+  }
+  @Get('edit')
+  @Render('admin/access/edit')
+  async edit(@Query() query) {
+    //把查到的数组转换成对象
+    const result = await this.accessService.find({ module_id: '0' });
+    const accessResult = await this.accessService.find({ _id: query.id });
+    return {
+      list: accessResult[0],
+      moduleList: result,
+    };
   }
 }
