@@ -12,7 +12,6 @@ import { AccessService } from 'src/service/access/access.service';
 import { ToolsService } from '../../../service/tools/tools.service';
 
 import { Config } from '../../../config/config';
-import { query } from 'express';
 @Controller(`${Config.adminPath}/role`)
 export class RoleController {
   constructor(
@@ -86,6 +85,7 @@ export class RoleController {
   async auth(@Query() query) {
     //1、在access表中找出 module_id = 0 的数据
     //2、让access表和access表关联  条件：找出access表中的module_id 等于 _id 的数据
+    const role_id = query.id;
     const result = await this.accessService.getModel().aggregate([
       {
         $lookup: {
@@ -101,6 +101,11 @@ export class RoleController {
         },
       },
     ]);
-    return {};
+    return {
+      list: result,
+      role_id: role_id,
+    };
   }
+
+  //提交权限
 }
