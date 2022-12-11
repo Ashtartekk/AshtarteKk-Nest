@@ -6,6 +6,7 @@ import { ToolsService } from '../../service/tools/tools.service';
 import { AdminSchema } from '../../schema/admin.schema';
 import { RoleSchema } from '../../schema/role.scheama';
 import { AccessSchema } from 'src/schema/access.schema';
+import { RoleAccessSchema } from 'src/schema/role_access.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AdminService } from '../../service/admin/admin.service';
 import { RoleService } from 'src/service/role/role.service';
@@ -19,6 +20,11 @@ import { AccessController } from './access/access.controller';
       { name: 'Admin', schema: AdminSchema, collection: 'admin' },
       { name: 'Role', schema: RoleSchema, collection: 'role' },
       { name: 'Access', schema: AccessSchema, collection: 'access' },
+      {
+        name: 'RoleAccess',
+        schema: RoleAccessSchema,
+        collection: 'role_access',
+      },
     ]),
   ],
   controllers: [
