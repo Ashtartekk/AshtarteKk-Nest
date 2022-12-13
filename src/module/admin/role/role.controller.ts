@@ -103,6 +103,26 @@ export class RoleController {
         },
       },
     ]);
+    //2.查询当前角色拥有的权限(查询当前角色的权限id) 把查找到的数据放在数组中
+    const accessResult = await this.roleAccessService.find({
+      role_id: role_id,
+    });
+    const roleAccessArray = [];
+    accessResult.forEach((value) => {
+      roleAccessArray.push(value.access_id.toString());
+    });
+    console.log(roleAccessArray);
+    //3.循环遍历所有的权限数据，判断当前权限是否在角色权限的数组中，如果是的话给当前数据加入
+    for (let i = 0; i < result.length; i++) {
+      if (roleAccessArray.indexOf(result[i]._id != -1)) {
+        result[i].checked = true;
+        for (let j = 0; j < result[i].items.length; j++) {
+          if (roleAccessArray.indexOf(result[i].item[j]._id) != -1) {
+            result[i].checked = true;
+          }
+        }
+      }
+    }
     return {
       list: result,
       role_id: role_id,
