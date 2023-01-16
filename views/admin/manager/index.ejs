@@ -1,8 +1,6 @@
 <%- include ('../public/page_header.ejs')%>
     <div class="container-fluid">
         <div class="row">
-
-
             <!--
                 列表展示
             -->
@@ -33,8 +31,8 @@
                                     <%=adminResult[i].role[0].title%>
                                 </td>
                                 <td class="text-center"><a
-                                        href="/<%=config.adminPath%>/manager/edit?id=<%=adminResult[i]._id%>">修改</a> 　<a
-                                        class=""
+                                        href="/<%=config.adminPath%>/manager/edit?id=<%=adminResult[i]._id%>">修改</a><a
+                                        class="delete"
                                         href="/<%=config.adminPath%>/manager/delete?id=<%=adminResult[i]._id%>">删除</a>
                                 </td>
                             </tr>

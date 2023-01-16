@@ -23,7 +23,7 @@ async function bootstrap() {
       secret: '6a1a165f-00c2-454a-901b-d93ecea48bf1',
       resave: true,
       saveUninitialized: true,
-      cookie: { maxAge: 219000, httpOnly: true },
+      cookie: { maxAge: 1000 * 60 * 30, httpOnly: true },
       rolling: true,
     }),
   );

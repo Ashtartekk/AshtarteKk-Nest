@@ -14,7 +14,7 @@ export class ToolsService {
       fontSize: 50,
       width: 100,
       height: 40,
-      background: '#cc9966',
+      background: '#27619e',
     });
     return captcha;
   }

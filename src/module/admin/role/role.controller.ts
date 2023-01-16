@@ -26,7 +26,7 @@ export class RoleController {
   @Render('admin/role/index')
   async index() {
     const result = await this.roleService.find({});
-
+    console.log(result);
     return {
       roleList: result,
     };

@@ -8,26 +8,55 @@
 // +----------------------------------------------------------------------
 */
 @CHARSET "UTF-8";
-body {
-	background:#01458E;
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+.container{
+	width: 100%;
+	height: 100vh;
+	animation: change 15s infinite;
+	background: linear-gradient(125deg, #2980b9, #633bd3, #8e44ad, #192f44, #27ae60);
+	background-size: 800%;
+	z-index: -99;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+@keyframes change {
+	0% {
+	  background-position-x: 0%;
+	}
+  
+	50% {
+	  background-position-x: 100%;
+	}
+  
+	100% {
+	  background-position-x: 0%;
+	}
+  }
+
 #login {
-	width:740px;
-	height:300px;
-	background:url(../images/loginbg.jpg) no-repeat left center;
-	/*background:#EDEFFC;*/
-	margin:120px auto 0 auto;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 2%;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.606);
+	opacity: 0.9;
+
 }
 #login dl{
-	width:500px;
+	width:400px;
+	height: 340px;
 	margin:0 0 0 auto;
-	padding:10px 0 0 20px;
-	color:#01458E;
-	float:left;
-	font-size:15px;
+	padding:10px 20px;
+	color:#27619e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 }
 #login dl dd {
-	margin:16px 0;
 	height:32px;
 	line-height:32px;
 }
@@ -38,17 +67,13 @@ body {
 	
 }
 #login dl dd input.submit {
-	background: url("../images/login_btn.jpg") no-repeat center center;
-    border:none;
-    margin: 10px;
-	margin-left:90px;
-    padding: 2px 8px 0;
-	cursor:pointer;
-	width:123px;
-	height:29px;
-}
-#login dl dd.code {
-	padding:0 0 0 72px;
+	width: 250px;
+	height: 40px;
+	background-color: rgb(132, 109, 188);
+	border-radius: 5px;
+	color: #fff;
+	border: none;
+	margin-top: 20px;
 }
 #login dl dd.code img {
 	border:1px solid #eee;
@@ -66,7 +91,21 @@ body {
     top:12px;
 }
 .text{
-	height:22px;
+	height:25px;
+	border-radius: 5px;
+}
+.codebox{
+	margin-right: 30px;
+	text-align: center;
+}
+.codetext{
+	height:25px;
+	width: 100px;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+.codeimg{
+	width: 130px;
 }
 .l_title{
 	height:40px;
@@ -74,7 +113,6 @@ body {
 	font-size:24px;
 	padding-left:5px;
 	padding-top:10px;
-	color:#01458e;
-	font-weight:bold;
-	
+	color:#66a6ea;
+	text-align: center;
 }

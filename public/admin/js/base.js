@@ -1,45 +1,36 @@
-$(function(){
-	
+$(function () {
 	app.init();
+});
 
-})
-
-var app={
-
-	init:function(){
+var app = {
+	init: function () {
 		this.slideToggle();
 		this.resizeIframe();
 
 		this.confirmDelete();
-
 	},
-	resizeIframe:function(){
+	resizeIframe: function () {
 		//1、获取浏览器的高度
 		//2、设置iframe的高度
 
 		// alert($(window).height());
 
-		$("#rightMain").height($(window).height()-80);
+		$('#rightMain').height($(window).height() - 80);
 	},
-	slideToggle:function(){
-		$('.aside h4').click(function(){		
-						
-					
-					$(this).siblings('ul').slideToggle();
-		})
+	slideToggle: function () {
+		$('.aside h4').click(function () {
+			$(this).siblings('ul').slideToggle();
+		});
 	},
 	// 提示是否删除
-	confirmDelete(){
-		$('.delete').click(function(){
-
-			var flag=confirm('您确定要删除吗?');
+	confirmDelete() {
+		$('.delete').click(function () {
+			var flag = confirm('您确定要删除吗?');
 			return flag;
-		})
-	}
+		});
+	},
+};
 
-}
-
-window.onresize=function(){
-
+window.onresize = function () {
 	app.resizeIframe();
-}
+};
